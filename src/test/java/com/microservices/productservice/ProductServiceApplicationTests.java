@@ -1,4 +1,4 @@
-package com.microservices.ProductService;
+package com.microservices.productservice;
 
 import org.junit.jupiter.api.Test;
 import org.springframework.boot.test.context.SpringBootTest;

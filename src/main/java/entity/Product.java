@@ -1,4 +1,4 @@
-package com.microservices.ProductService.entity;
+package com.microservices.productservice.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
