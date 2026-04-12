@@ -40,4 +40,27 @@ public class ProductService {
         Product product = getProductById(id);
         return product.getStock() >= quantity;// returns true or false
     }
+    // UPDATE
+    public Product updateProduct(Long id, Product updatedProduct) {
+        Product existingProduct = getProductById(id);
+
+        existingProduct.setName(updatedProduct.getName());
+        existingProduct.setPrice(updatedProduct.getPrice());
+        existingProduct.setStock(updatedProduct.getStock());
+
+        return productRepository.save(existingProduct);
+    }
+
+    // DELETE
+    public void deleteProduct(Long id) {
+        productRepository.deleteById(id);
+    }
+
+
+
+
+
+
 }
+
+
