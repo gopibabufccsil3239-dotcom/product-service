@@ -6,6 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.data.domain.Page;
 
 @RestController
 @RequestMapping("/products")
@@ -45,4 +46,22 @@ public class ProductController {
         productService.deleteProduct(id);
         return "Product deleted successfully";
     }
+    @GetMapping("/paginated")
+    public Page<Product> getProducts(
+            @RequestParam int page,
+            @RequestParam int size,
+            @RequestParam String sortBy) {
+
+        return productService.getProductsWithPagination(page, size, sortBy);
+    }
+    @GetMapping("/filter")
+    public List<Product> filterProducts(
+            @RequestParam double minPrice) {
+
+        return productService.filterProductsByPrice(minPrice);
+    }
+
+
+
+
 }

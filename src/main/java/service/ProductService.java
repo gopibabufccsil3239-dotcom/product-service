@@ -4,6 +4,10 @@ import com.microservices.productservice.entity.Product;
 import com.microservices.productservice.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Sort;
 
 import java.util.List;
 import java.util.Optional;
@@ -56,7 +60,23 @@ public class ProductService {
         productRepository.deleteById(id);
     }
 
+    // PAGINATION + SORTING
+    public Page<Product> getProductsWithPagination(int page, int size, String sortBy) {
+        Pageable pageable = PageRequest.of(page, size, Sort.by(sortBy));
+        return productRepository.findAll(pageable);
+    }
 
+    // JAVA STREAMS FILTER + TRANSFORM
+    public List<Product> filterProductsByPrice(double minPrice) {
+        return productRepository.findAll()
+                .stream()
+                .filter(product -> product.getPrice() > minPrice)
+                .map(product -> {
+                    product.setName(product.getName().toUpperCase());
+                    return product;
+                })
+                .toList();
+    }
 
 
 
