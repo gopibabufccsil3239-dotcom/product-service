@@ -60,6 +60,10 @@ public class ProductController {
 
         return productService.filterProductsByPrice(minPrice);
     }
+    @GetMapping("/price")
+    public List<Product> getProductsAbovePrice(@RequestParam double price) {
+        return productService.getProductsAbovePrice(price);
+    }
 
 
 

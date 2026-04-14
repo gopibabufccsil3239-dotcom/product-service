@@ -77,6 +77,9 @@ public class ProductService {
                 })
                 .toList();
     }
+    public List<Product> getProductsAbovePrice(double price) {
+        return productRepository.findProductsAbovePrice(price);
+    }
 
 
 
